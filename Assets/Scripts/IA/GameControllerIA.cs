@@ -4,27 +4,49 @@ using UnityEngine;
 
 public class GameControllerIA : MonoBehaviour {
 
-	[Tooltip("True si ha terminado la partida. False si no ha terminado la partida.")]
+    /// <summary>
+    /// Controla si la partida ha finalizado o no.
+    /// </summary>
+    [Tooltip("True si ha terminado la partida. False si no ha terminado la partida.")]
 	public  bool isFinished;
 
-    //Turno IA: 0. Turno jugador: 1
+    /// <summary>
+    /// Controla el turno del jugador
+    /// </summary>
     [Tooltip("Turno IA: 0. Turno jugador: 1.")]
 	public byte turn;
 
-	[SerializeField]
+    /// <summary>
+    /// Contiene el controlador del HUD del juego
+    /// </summary>
+    [SerializeField]
 	private CanvasManager canvas;
 
-	//True si ha seleccionado una ficha. False si no.
+    /// <summary>
+    /// Controla si ha seleccionado una ficha o no.
+    /// True si ha seleccionado una ficha. False si no.
+    /// </summary>
 	private bool selectedChecker;
-	//Pieza seleccionada
+
+    /// <summary>
+    /// Contiene la ficha seleccionada
+    /// </summary>
 	private Checker tempChecker;
 
-	//Tablero
+    /// <summary>
+    /// Contiene el tablero de juego
+    /// </summary>
 	public BoardIA board;
 
+    /// <summary>
+    /// Se crea una instancia de este controlador para la IA
+    /// </summary>
     public static GameControllerIA instance;
 
-	private void Awake()
+    /// <summary>
+    /// Metodo que inicializa las variables básicas
+    /// </summary>
+    private void Awake()
 	{
         instance = this;
 		turn = 1;

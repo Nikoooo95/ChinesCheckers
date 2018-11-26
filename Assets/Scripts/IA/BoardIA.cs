@@ -9,15 +9,20 @@ public class BoardIA : MonoBehaviour
     /// Prefab de una ficha
     /// </summary>
     [SerializeField] private GameObject checkerPrefab;
+
     /// <summary>
     /// Materiales de las fichas(blancas o negras)
     /// </summary>
     [SerializeField] private Material[] checkerMaterials;
+
     /// <summary>
     /// Material de las casillas de inicio
     /// </summary>
     [SerializeField] private Material startBoxMaterials;
 
+    /// <summary>
+    /// Indica el numero de columnas que se ocupan al inicio de la partida
+    /// </summary>
     [SerializeField]
     [Tooltip("Indica el numero de columnas que ocupan las fichas al inicio")]
     [Range(1, 8)]

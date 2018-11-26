@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+    /// <summary>
+    /// Controla si la partida ha finalizado o no.
+    /// </summary>
     [SerializeField]
     [Tooltip("True si ha terminado la partida. False si no ha terminado la partida.")]
     private bool isFinished;
 
+    /// <summary>
+    /// Controla el turno del jugador
+    /// </summary>
     [SerializeField]
     [Tooltip("Turno jugador 1: 0. Turno jugador 2: 1.")]
     private byte turn;
 
+    /// <summary>
+    /// Contiene el controlador del HUD del juego
+    /// </summary>
     [SerializeField]
     private CanvasManager canvas;
 
-    //True si ha seleccionado una ficha. False si no.
+    /// <summary>
+    /// Controla si ha seleccionado una ficha o no.
+    /// True si ha seleccionado una ficha. False si no.
+    /// </summary>
     private bool selectedChecker;
 
-    //Pieza seleccionada
+    /// <summary>
+    /// Contiene la ficha seleccionada
+    /// </summary>
     private Checker tempChecker;
 
-    //Tablero
+    /// <summary>
+    /// Contiene el tablero de juego
+    /// </summary>
     [SerializeField] private Board board;
 
-
-
-
+    /// <summary>
+    /// Metodo que inicializa las variables básicas
+    /// </summary>
     private void Awake()
     {
         turn = 1;
@@ -34,8 +50,13 @@ public class GameController : MonoBehaviour {
         isFinished = false;
     }
 
-
-
+    /// <summary>
+    /// Se encarga de controlar cuando un jugador ha hecho click sobre una ficha
+    /// y, dependiendo del turno, sobre que ficha.
+    /// Por otro lado, se encarga de llamar a los metodos correspondientes para ver
+    /// a que casillas se puede mover una ficha.
+    /// Así mismo, se encarga de mover la ficha al lugar que el jugador le ha indicado.
+    /// </summary>
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !isFinished)
@@ -91,7 +112,6 @@ public class GameController : MonoBehaviour {
                         }
                         else
                         {
-                            Debug.Log("Casilla no posible");
                             board.hidePosiblesBoxes();
                         }
                         ChangeAlphaColor(tempChecker.gameObject, 255);
@@ -112,26 +132,31 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Se encarga de comprobar la victoria y el final de partida
+    /// </summary>
     private void checkVictory()
     {
         if (board.getNumStartBoxes() == board.getNumWhiteBoxesBusies())
         {
-            Debug.Log("Victoria 2");
+            //Debug.Log("Victoria 2");
             isFinished = true;
             canvas.showVictory(2);
         }
-            
-
         else if (board.getNumStartBoxes() == board.getNumBlackBoxesBusies())
         {
-            Debug.Log("Victoria 1");
+            //Debug.Log("Victoria 1");
             isFinished = true;
             canvas.showVictory(1);
         }
             
     }
 
-
+    /// <summary>
+    /// Se encarga de cambiar el material de una ficha cuando esta ha sido seleccionada
+    /// </summary>
+    /// <param name="tempG"></param>
+    /// <param name="value"></param>
     void ChangeAlphaColor(GameObject tempG, byte value)
     {
         MeshRenderer[] m = tempG.GetComponentsInChildren<MeshRenderer>();

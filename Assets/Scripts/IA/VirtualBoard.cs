@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class VirtualBoard {
 
+    /// <summary>
+    /// Array con los valores de las casillas en el tablero.
+    /// Contiene 0 si esta vacio.
+    /// Contiene 1 si esta ocupado por las fichas blancas.
+    /// Contiene 2 si esta ocupado por las fichas negras
+    /// </summary>
     public byte[] spaces;
 
+    /// <summary>
+    /// Contiene el valor del jugador activo en dicho tablero
+    /// </summary>
     public byte activePlayer;
 
+    /// <summary>
+    /// Matriz de evaluacion para la funcion que evalua las posiciones en
+    /// el tablero
+    /// </summary>
     public short[] matrizEvaluacion =
 {
         0, 1, 2, 3, 4, 5, 6, 7, 8,
@@ -180,6 +193,19 @@ public class VirtualBoard {
         spaces[oldPos] = 0;
         activePlayer = ChangePlayer(activePlayer);
         return this;
+    }
+
+    public VirtualBoard generateCloneBoard()
+    {
+        VirtualBoard board = new VirtualBoard();
+        for(int c=0;c<spaces.Length;++c)
+        {
+            board.spaces[c] = spaces[c];
+        }
+
+        board.activePlayer = activePlayer;
+
+        return board;
     }
 
     /// <summary>

@@ -31,7 +31,9 @@ public class Box: MonoBehaviour
     /// </summary>
     private byte index;
 
-
+    /// <summary>
+    /// Establece los valores por defecto de las variables
+    /// </summary>
     private void Awake()
     {
         
@@ -92,7 +94,6 @@ public class Box: MonoBehaviour
     {
         return index;
     }
-
 
     public bool getIsBusy() { return isBusy; }
     public void setIsBusy(bool b) { isBusy = b; }
